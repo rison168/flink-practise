@@ -4,7 +4,6 @@ package com.rison.realtime.ods;
 import com.alibaba.ververica.cdc.connectors.mysql.MySQLSource;
 import com.alibaba.ververica.cdc.connectors.mysql.table.StartupOptions;
 import com.alibaba.ververica.cdc.debezium.DebeziumSourceFunction;
-import com.alibaba.ververica.cdc.debezium.StringDebeziumDeserializationSchema;
 import com.rison.realtime.founction.CustomerDeserialization;
 import com.rison.realtime.utils.MyKafkaUtil;
 import org.apache.flink.runtime.state.filesystem.FsStateBackend;
