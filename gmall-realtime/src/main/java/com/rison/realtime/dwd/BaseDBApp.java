@@ -7,6 +7,7 @@ import com.alibaba.ververica.cdc.connectors.mysql.table.StartupOptions;
 import com.alibaba.ververica.cdc.debezium.DebeziumSourceFunction;
 import com.rison.realtime.bean.TableProcess;
 import com.rison.realtime.founction.CustomerDeserialization;
+import com.rison.realtime.founction.TableProcessFunction;
 import com.rison.realtime.utils.MyKafkaUtil;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.state.MapState;
@@ -61,7 +62,7 @@ public class BaseDBApp {
         BroadcastConnectedStream<JSONObject, String> connectedStream = jsonObjDS.connect(broadcastStream);
         //TODO  分流 处理数据 广播流数据（根据广播流数据进行处理）
         OutputTag<JSONObject> hbaseTag = new OutputTag<>("hbase-tag");
-        SingleOutputStreamOperator<Object> process = connectedStream.process(new TableProcessFunction(hbaseTag, mapStateDescriptor));
+        SingleOutputStreamOperator<JSONObject> process = connectedStream.process(new TableProcessFunction(hbaseTag, mapStateDescriptor));
 
         env.execute("BaseDBApp");
 
